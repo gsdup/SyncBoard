@@ -10,8 +10,6 @@
 
 ## 🛠️ 确定性技术栈 (Tech Stack)
 
-我们拒绝模棱两可，以下是经过验证的最佳实践选型：
-
 ### ☕ 后端 (Enterprise Grade)
 
 - **语言**: **Java 21 LTS** (启用 Virtual Threads 以获得极致吞吐量)
