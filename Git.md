@@ -31,12 +31,12 @@ git pull
 git checkout -b feature/user-login
 ```
 
-### 第二阶段：开发与提交
+### 第二阶段：开发与提交(使用英文描述)
 在本地进行开发。保持原子提交（一个 Commit 只做一件事）。
 
 ```bash
 git add .
-git commit -m "feat: 完成登录框UI布局"
+git commit -m "feat: complete login pages"
 ```
 
 ### 第三阶段：推送到远程
@@ -74,6 +74,9 @@ git fetch -p
 
 # 4. 删除本地功能分支
 git branch -d feature/user-login
+
+# 5. 删除远程功能分支
+git push origin --delete feature/user-login
 ```
 
 ---
