@@ -1,0 +1,29 @@
+spring:
+  # 开发环境数据源配置
+  datasource:
+    url: jdbc:postgresql://localhost:5432/syncboard
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:123456}
+  
+  # 开发环境 JPA 配置
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# 开发环境服务器配置
+server:
+  port: 8080
+
+# 开发环境日志配置
+logging:
+  level:
+    root: INFO
+    com.syncboard.backend: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
