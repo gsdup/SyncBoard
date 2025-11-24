@@ -14,16 +14,15 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
+import java.util.UUID;
 
 @Service
 public class AuthService {
 
     private final UserRepository userRepository;
-    private final TokenService tokenService;
 
-    public AuthService(UserRepository userRepository, TokenService tokenService) {
+    public AuthService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.tokenService = tokenService;
     }
 
     @Transactional
@@ -36,9 +35,10 @@ public class AuthService {
         User user = new User();
         user.setUsername(request.username());
         user.setPassword(hashPassword(request.password()));
+        user.setToken(generateToken());
+
         User saved = userRepository.save(user);
-        String token = tokenService.generateToken(saved);
-        return new AuthResponse(saved.getUsername(), token);
+        return new AuthResponse(saved.getUsername(), saved.getToken());
     }
 
     @Transactional
@@ -51,8 +51,9 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "密码错误");
         }
 
-        String token = tokenService.generateToken(user);
-        return new AuthResponse(user.getUsername(), token);
+        user.setToken(generateToken());
+        User saved = userRepository.save(user);
+        return new AuthResponse(saved.getUsername(), saved.getToken());
     }
 
     private String hashPassword(String rawPassword) {
@@ -65,5 +66,8 @@ public class AuthService {
         }
     }
 
+    private String generateToken() {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
 }
 

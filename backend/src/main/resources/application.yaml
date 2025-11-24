@@ -70,7 +70,3 @@ management:
   endpoint:
     health:
       show-details: when-authorized
-
-jwt:
-  secret: ${JWT_SECRET:change-me-change-me-change-me-change-me}
-  expiration: ${JWT_EXPIRATION:PT2H}
